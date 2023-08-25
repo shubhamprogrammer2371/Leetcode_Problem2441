@@ -1,0 +1,21 @@
+int cmp(const void* a, const void* b)
+{ 
+    return *(int*)a - *(int*)b; 
+}
+int findMaxK(int* nums, int numsSize){
+    qsort(nums,numsSize,sizeof(int),cmp);
+    int left = 0 , right = numsSize - 1;
+    while(left < right)
+    {
+        if(-nums[left] != nums[right])
+        {
+            if(abs(nums[left]) > nums[right])
+                left++;
+            else
+                right--;
+        }
+        else
+            return nums[right];
+    }
+    return -1;
+}
